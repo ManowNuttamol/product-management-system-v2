@@ -1,0 +1,207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Product Management System",
+    "description": "Documentation for request APIs from product management systems."
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Product",
+      "description": "Tools for managing products in the system"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Show all product information",
+        "responses": {
+          "200": {
+            "description": "Product information",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Add product information to the system",
+        "parameters": [
+          {
+            "name": "newProduct",
+            "in": "body",
+            "description": "New product information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddProduct"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Show product information",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product information",
+            "schema": {
+              "$ref": "#/definitions/Products"
+            }
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Update product information in the system",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product id to be updated"
+          },
+          {
+            "name": "editProduct",
+            "in": "body",
+            "description": "Edit product information",
+            "schema": {
+              "$ref": "#/definitions/AddProduct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "description": "Delete product information from the system",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Product id to be deleted"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Products": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 0
+        },
+        "name": {
+          "type": "string",
+          "example": "Product name"
+        },
+        "category": {
+          "type": "string",
+          "example": "Product category"
+        },
+        "price": {
+          "type": "number",
+          "example": 0
+        },
+        "stock": {
+          "type": "number",
+          "example": 0
+        }
+      }
+    },
+    "AddProduct": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Product name"
+        },
+        "category": {
+          "type": "string",
+          "example": "Product category"
+        },
+        "price": {
+          "type": "number",
+          "example": 0
+        },
+        "stock": {
+          "type": "number",
+          "example": 0
+        }
+      },
+      "required": [
+        "name",
+        "category",
+        "price",
+        "stock"
+      ]
+    }
+  }
+}
